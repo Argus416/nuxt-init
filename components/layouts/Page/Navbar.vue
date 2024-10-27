@@ -59,18 +59,18 @@ const showDrawer = ref(false)
                     awesome?.project?.links?.github,
                 )
               "
-              @click="signIn(provider.id)"
               size="sm"
               type="secondary"
+              @click="signIn(provider.id)"
             />
           </div>
 
           <div v-else>
             <AwesomeButton
               :text="`Welcome, ${userSession?.user?.name}`"
-              @click="() => signOut()"
               size="sm"
               type="danger"
+              @click="() => signOut()"
             />
           </div>
         </div>

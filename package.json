@@ -37,10 +37,11 @@
     "lint": "eslint --ext \".ts,.js,.vue\" --ignore-path .eslintignore .",
     "lint:fix": "eslint --fix --ext \".ts,.js,.vue\" --ignore-path .eslintignore .",
     "release": "release-it",
-    "db:generate": "drizzle-kit generate",
+    "db:generate": "npx drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@formkit/nuxt": "^1.6.7",
     "@nuxt/content": "^2.9.0",
     "@nuxt/devtools": "^1.0.0",
     "@nuxtjs/color-mode": "^3.3.0",

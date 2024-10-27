@@ -1,6 +1,15 @@
 <script lang="ts" setup>
 definePageMeta({ layout: 'page' })
 useHead({ title: 'Blank Page' })
+
+const randomTitle = ref(
+  `Qu'est-ce que le Lorem Ipsum? ${Math.ceil(Math.random() * 99999)}`,
+)
+const randomDescription = ref(
+  `Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.`,
+)
+
+const newPost = async () => {}
 </script>
 
 <template>
@@ -8,13 +17,32 @@ useHead({ title: 'Blank Page' })
     <LayoutPageHeader>
       <LayoutPageTitle text="New post" class="capitalize" />
     </LayoutPageHeader>
-    <LayoutPageSection>
-      <LayoutPageSectionTitle text="Section Title" />
-      <div>My Content</div>
-    </LayoutPageSection>
-    <LayoutPageSection>
-      <LayoutPageSectionTitle text="Another Section" />
-      <div>My Content</div>
+    <LayoutPageSection class="">
+      <FormKit
+        v-model="randomTitle"
+        type="text"
+        label="Title"
+        :classes="{
+          outer: 'max-w-full',
+        }"
+      />
+      <FormKit
+        v-model="randomDescription"
+        type="textarea"
+        label="Description"
+        :classes="{
+          outer: 'max-w-full',
+        }"
+      />
+
+      <div class="flex justify-end">
+        <AwesomeButton
+          text="Submit"
+          type="submit"
+          class="mt-4"
+          @click="newPost()"
+        />
+      </div>
     </LayoutPageSection>
   </LayoutPageWrapper>
 </template>

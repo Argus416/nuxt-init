@@ -12,7 +12,7 @@ export const users = pgTable('users', {
   refresh_token_expires_in: timestamp().notNull(),
 })
 
-export const todos = pgTable('todos', {
+export const posts = pgTable('posts', {
   id: uuid().primaryKey().defaultRandom(),
   title: text().notNull(),
   description: text().notNull(),
@@ -23,9 +23,9 @@ export const todos = pgTable('todos', {
 })
 
 export const userRelations = relations(users, ({ many }) => ({
-  todos: many(todos),
+  posts: many(posts),
 }))
 
-export const todosRelations = relations(todos, ({ one }) => ({
+export const postsRelations = relations(posts, ({ one }) => ({
   users: one(users),
 }))

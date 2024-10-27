@@ -96,9 +96,6 @@ export default defineNuxtConfig({
       theme: 'github-dark',
     },
   },
-  runtimeConfig: {
-    POSTGRES_URI: 'postgres://postgres:123321@localhost:5432/nuxt-todo',
-  },
 
   // todo: feat/localization
   // module::i18n

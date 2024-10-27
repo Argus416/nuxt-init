@@ -10,4 +10,4 @@ export function useDrizzle() {
 }
 
 export type User = typeof schema.users.$inferSelect
-export type Todo = typeof schema.todos.$inferSelect
+export type Post = typeof schema.posts.$inferSelect
