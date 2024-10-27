@@ -6,20 +6,30 @@ const randomTitle = ref(`${Math.ceil(Math.random() * 99999)}`)
 const randomDescription = ref(
   `Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.`,
 )
-
+const displayAlert = ref(false)
 const newPost = async () => {
   try {
-    const response = await $fetch('/api/posts', {
+    displayAlert.value = true
+    await $fetch('/api/posts', {
       method: 'POST',
       body: {
         title: randomTitle.value,
         description: randomDescription.value,
       },
     })
-    console.log('response', response.data.value)
+    newRandomPost()
   } catch (err) {
-    console.log(err)
+    console.error(err)
+  } finally {
+    setTimeout(() => {
+      displayAlert.value = false
+    }, 3000)
   }
+}
+
+const newRandomPost = () => {
+  randomTitle.value = `${Math.ceil(Math.random() * 99999)}`
+  randomDescription.value = `Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.`
 }
 </script>
 
@@ -27,6 +37,14 @@ const newPost = async () => {
   <LayoutPageWrapper>
     <LayoutPageHeader>
       <LayoutPageTitle text="New post" class="capitalize" />
+
+      <AwesomeAlertBanner
+        v-if="displayAlert"
+        type="success"
+        title="Post created"
+        text="Your post has been created successfully"
+        class="my-6"
+      />
     </LayoutPageHeader>
     <LayoutPageSection class="">
       <FormKit

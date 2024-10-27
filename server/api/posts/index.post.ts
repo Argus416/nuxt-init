@@ -1,17 +1,25 @@
 import { posts } from '../../database/schema'
+import { getServerSession } from '#auth'
 
 export default defineEventHandler(async (event) => {
-  const { title, description } = await readBody(event)
-  const { data } = useAuth()
+  try {
+    const { title, description } = await readBody(event)
+    const { user } = await getServerSession(event)
 
-  const newPost = await useDrizzle()
-    .insert(posts)
-    .values({
-      title,
-      description,
-      user_id: data?.user?.id,
+    const newPost = await useDrizzle()
+      .insert(posts)
+      .values({
+        title,
+        description,
+        user_id: user?.id,
+      })
+      .returning()
+
+    return newPost[0]
+  } catch (e) {
+    createError({
+      statusMessage: `Error creating post: ${e.message}`,
+      statusCode: 500,
     })
-    .returning()
-
-  return newPost[0]
+  }
 })

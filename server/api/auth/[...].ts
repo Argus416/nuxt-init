@@ -1,7 +1,7 @@
 // file: ~/server/api/auth/[...].ts
 import GithubProvider from 'next-auth/providers/github'
-import { NuxtAuthHandler } from '#auth'
 import { users } from '../../database/schema'
+import { NuxtAuthHandler } from '#auth'
 
 interface GithubUser {
   name: string
