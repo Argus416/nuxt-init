@@ -5,6 +5,6 @@ export const useUser = () => {
 
   return {
     isLoggedIn: true,
-    user,
+    userSession: { ...user },
   }
 }

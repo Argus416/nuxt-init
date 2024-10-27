@@ -5,10 +5,8 @@
     "strict": true,
     "skipLibCheck": true,
     "ignoreDeprecations": "5.0",
-    "suppressImplicitAnyIndexErrors": true,
-    "types": [
-      "@pinia/nuxt",
-      "@nuxtjs/tailwindcss",
-    ]
+    "noImplicitAny": true,
+    "module": "ES2022",
+    "types": ["@pinia/nuxt", "@nuxtjs/tailwindcss"]
   }
 }
