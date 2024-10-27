@@ -44,14 +44,6 @@ const leadingsText = computed(() => [
     delay: 4,
   },
 ])
-
-onMounted(() => {
-  try {
-    console.log('aweawe', parseMenuTitle('aweawe'), this)
-  } catch (error) {
-    console.log('aweawe error', error)
-  }
-})
 </script>
 
 <template>

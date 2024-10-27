@@ -7,7 +7,8 @@ export default defineTask({
     console.log('Running DB seed task...')
     const users = [
       {
-        name: 'John Doe',
+        first_name: 'John',
+        last_name: 'Doe',
         email: 'john@example.com',
         password: 'password123',
         avatar: 'https://example.com/avatar/john.png',
