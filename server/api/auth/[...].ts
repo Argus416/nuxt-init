@@ -1,6 +1,17 @@
 // file: ~/server/api/auth/[...].ts
 import GithubProvider from 'next-auth/providers/github'
 import { NuxtAuthHandler } from '#auth'
+import { users } from '../../database/schema'
+
+interface GithubUser {
+  name: string
+  email: string
+  image: string
+}
+interface GitHubSession {
+  user: GithubUser
+  expires: Date
+}
 
 export default NuxtAuthHandler({
   secret: 'toto titi tata',
@@ -11,7 +22,6 @@ export default NuxtAuthHandler({
       clientSecret: '573789c70ede7fad9544b8308241b7c047ad0a11',
     }),
   ],
-
   pages: {
     signIn: '/auth/signIn',
     signOut: '/auth/signOut',
@@ -20,38 +30,47 @@ export default NuxtAuthHandler({
     newUser: '/auth/new-user',
   },
 
-  async signIn({ user, account, profile, email, credentials }) {
-    return true
-  },
-  /* on redirect to another url */
-  async redirect({ url, baseUrl }) {
-    return baseUrl
-  },
+  callbacks: {
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   console.log('totot signin')
+    //   return true
+    // },
+    /* on redirect to another url */
+    // async redirect({ url, baseUrl }) {
+    //   return baseUrl
+    // },
+    /* on session retrival */
+    async session({ session }: { session: GitHubSession }) {
+      const additionalUserData = session.user
 
-  /* on session retrival */
-  async session({ session, token }) {
-    // Token we injected into the JWT callback above.
-    token = token.sessionToken
+      const user = await useDrizzle()
+        .insert(users)
+        .values({
+          avatar: additionalUserData.image,
+          email: additionalUserData.email,
+          fullname: additionalUserData.name,
+          refresh_token_expires_in: new Date(session.expires),
+        })
+        .onConflictDoUpdate({
+          target: users.email,
+          set: {
+            refresh_token_expires_in: new Date(session.expires),
+          },
+        })
+        .returning()
 
-    // Fetch data OR add previous data from the JWT callback.
-    const additionalUserData = await $fetch(`/api/session/${token}`)
+      if (!user.length) return null
 
-    // Return the modified session
-    return {
-      ...session,
-      user: {
-        name: additionalUserData.name,
-        avatar: additionalUserData.avatar,
-        role: additionalUserData.role,
-      },
-    }
-  },
-
-  /* on JWT token creation or mutation */
-  async jwt({ token, user, account, profile, isNewUser }) {
-    if (account) {
-      token.sessionToken = account.session_token
-    }
-    return token
+      return {
+        user: user[0],
+      }
+    },
+    /* on JWT token creation or mutation */
+    // async jwt({ token, user, account, profile, isNewUser }) {
+    //   if (account) {
+    //     token.sessionToken = account.session_token
+    //   }
+    //   return token
+    // },
   },
 })

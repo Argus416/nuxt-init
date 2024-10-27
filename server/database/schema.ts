@@ -3,10 +3,9 @@ import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 
 export const users = pgTable('users', {
   id: uuid().primaryKey().defaultRandom(),
-  first_name: text('first_name').notNull(),
-  last_name: text('last_name').notNull(),
+  fullname: text('fullname').notNull(),
   email: text('email').notNull().unique(),
-  password: text('password').notNull(),
+  password: text('password'),
   avatar: text('avatar').notNull(),
   created_at: timestamp({ withTimezone: true }).defaultNow(),
   refresh_token_expires_in: timestamp().notNull(),

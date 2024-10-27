@@ -67,7 +67,7 @@ const showDrawer = ref(false)
 
           <div v-else>
             <AwesomeButton
-              :text="`Welcome, ${userSession?.user?.name}`"
+              :text="`Welcome, ${userSession?.user.fullname}`"
               size="sm"
               type="danger"
               @click="() => signOut()"
