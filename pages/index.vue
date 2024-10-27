@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const { awesome } = useAppConfig()
 definePageMeta({ layout: 'page' })
-useHead({ titleTemplate: '', title: awesome?.name || 'Nuxt 3 Awesome Starter' })
+useHead({ titleTemplate: '', title: awesome?.name || 'Nuxt todo app' })
 
 const { signIn, getProviders } = useAuth()
 const providers = await getProviders()

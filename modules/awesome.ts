@@ -10,7 +10,7 @@ import type { Config as TailwindConfig } from 'tailwindcss'
 
 export default defineNuxtModule({
   meta: {
-    name: 'Nuxt 3 Awesome Starter Kit Module',
+    name: 'Nuxt todo app Kit Module',
   },
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)

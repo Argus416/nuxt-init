@@ -31,7 +31,7 @@ export default NuxtAuthHandler({
   /* on session retrival */
   async session({ session, token }) {
     // Token we injected into the JWT callback above.
-    const token = token.sessionToken
+    token = token.sessionToken
 
     // Fetch data OR add previous data from the JWT callback.
     const additionalUserData = await $fetch(`/api/session/${token}`)
