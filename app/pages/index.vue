@@ -5,7 +5,6 @@ useHead({ titleTemplate: '', title: awesome?.name || 'Nuxt blog app' })
 
 const { signIn, getProviders } = useAuth()
 const providers = await getProviders()
-const { isLoggedIn } = useUser()
 </script>
 
 <template>

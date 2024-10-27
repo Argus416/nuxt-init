@@ -9,8 +9,7 @@ const randomDescription = ref(
 
 const newPost = async () => {
   try {
-    const response = await useFetch({
-      url: '/api/posts',
+    const response = await $fetch('/api/posts', {
       method: 'POST',
       body: {
         title: randomTitle.value,
