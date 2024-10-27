@@ -36,10 +36,19 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     // contents,
     '@nuxt/content',
-
     // todo: feat/localization
     // '@nuxtjs/i18n'
+    '@sidebase/nuxt-auth',
   ],
+
+  auth: {
+    provider: {
+      type: 'authjs',
+      trustHost: false,
+      defaultProvider: 'github',
+      addDefaultCallbackUrl: true,
+    },
+  },
 
   css: [
     resolve('./assets/scss/_variables.scss'),

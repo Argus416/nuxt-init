@@ -9,6 +9,7 @@ export const users = pgTable('users', {
   password: text('password').notNull(),
   avatar: text('avatar').notNull(),
   created_at: timestamp({ withTimezone: true }).defaultNow(),
+  refresh_token_expires_in: timestamp().notNull(),
 })
 
 export const todos = pgTable('todos', {
