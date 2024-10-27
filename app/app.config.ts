@@ -1,5 +1,3 @@
-import type { AppConfigInput } from 'nuxt/schema'
-
 export default defineAppConfig({
   awesome: {
     name: 'Nuxt 3 Awesome Starter',
@@ -7,7 +5,7 @@ export default defineAppConfig({
       'a starter template for Nuxt 3 with minimalist themes design, built in components, drawer & menus, and more.',
     project: {
       links: {
-        github: 'https://github.com/viandwi24/nuxt3-awesome-starter',
+        github: 'https://github.com/Argus416/nuxt-init',
       },
     },
     layout: {
@@ -17,17 +15,17 @@ export default defineAppConfig({
             { type: 'link', title: 'Blank', to: { name: 'blank' } },
             { type: 'link', title: 'Post', to: { name: 'post' } },
             { type: 'link', title: 'Test', to: { name: 'test' } },
-            {
-              type: 'dropdown',
-              title: 'Documentations',
-              children: [
-                {
-                  type: 'link',
-                  title: 'Components',
-                  to: { name: 'docs-components' },
-                },
-              ],
-            },
+            // {
+            //   type: 'dropdown',
+            //   title: 'Documentations',
+            //   children: [
+            //     {
+            //       type: 'link',
+            //       title: 'Components',
+            //       to: { name: 'docs-components' },
+            //     },
+            //   ],
+            // },
             { type: 'button', title: 'Setting', to: { name: 'setting' } },
             // dynamic title
             // {

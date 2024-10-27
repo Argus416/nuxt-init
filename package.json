@@ -9,7 +9,7 @@
   "main": "./nuxt.config.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/viandwi24/nuxt3-awesome-starter"
+    "url": "git://github.com/Argus416/nuxt-init"
   },
   "files": [
     "assets",

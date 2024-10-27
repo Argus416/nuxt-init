@@ -94,7 +94,9 @@ const showDrawer = ref(false)
           <div
             class="flex flex-col text-sm items-center divide-y divide-gray-400 dark:divide-gray-700 text-center"
           >
-            <template v-for="(item, i) in menus">
+            <template
+              v-for="(item, i) in menus.filter((e) => e.type === 'dropdown')"
+            >
               <template v-if="item?.type === 'link'">
                 <NuxtLink
                   :key="i"

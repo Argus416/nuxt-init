@@ -8,7 +8,7 @@ export default defineNuxtSchema({
         'a starter template for Nuxt 3 with minimalist themes design, built in components, drawer & menus, and more.',
       project: {
         links: {
-          github: 'https://github.com/viandwi24/nuxt3-awesome-starter',
+          github: 'https://github.com/Argus416/nuxt-init',
         },
       },
       layout: {

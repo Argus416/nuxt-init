@@ -78,22 +78,6 @@ const leadingsText = computed(() => [
         </div>
         <div class="flex space-x-4 ml-2 mt-8 justify-center md:justify-start">
           <AwesomeButton
-            size="lg"
-            :text="
-              parseMenuTitle(
-                awesome?.layout?.welcome?.primaryActionButton?.title ||
-                  'Nuxt 3',
-              )
-            "
-            :to="
-              parseMenuRoute(
-                awesome?.layout?.welcome?.primaryActionButton?.to ||
-                  'https://nuxt.com',
-              )
-            "
-            class="font-extrabold"
-          />
-          <AwesomeButton
             v-if="
               parseMenuRoute(
                 awesome?.layout?.welcome?.secondaryActionButton?.to ||
@@ -114,7 +98,7 @@ const leadingsText = computed(() => [
             "
             size="lg"
             class="font-extrabold"
-            type="secondary"
+            type=""
           />
         </div>
       </div>

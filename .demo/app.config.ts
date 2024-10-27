@@ -18,12 +18,12 @@ export default defineAppConfig({
         disableInfoReplaceIndexInWelcomePage: false,
         secondaryActionButton: {
           title: 'See Github',
-        }
-      }
+        },
+      },
     },
     project: {
       links: {
-        github: 'https://github.com/viandwi24/nuxt3-awesome-starter',
+        github: 'https://github.com/Argus416/nuxt-init',
       },
     },
   },
