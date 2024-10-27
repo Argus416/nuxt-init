@@ -14,6 +14,7 @@ export default defineAppConfig({
           menus: [
             { type: 'link', title: 'Blank', to: { name: 'blank' } },
             { type: 'link', title: 'Post', to: { name: 'post' } },
+            { type: 'link', title: 'New post', to: { name: 'new-post' } },
             // {
             //   type: 'dropdown',
             //   title: 'Documentations',
