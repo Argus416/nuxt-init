@@ -19,7 +19,7 @@ const newPost = async () => {
     })
     newRandomPost()
   } catch (err) {
-    console.error(err)
+    console.log(err)
   } finally {
     setTimeout(() => {
       displayAlert.value = false
@@ -46,7 +46,7 @@ const newRandomPost = () => {
         class="my-6"
       />
     </LayoutPageHeader>
-    <LayoutPageSection class="">
+    <div class="">
       <FormKit
         v-model="randomTitle"
         type="text"
@@ -72,6 +72,6 @@ const newRandomPost = () => {
           @click="newPost"
         />
       </div>
-    </LayoutPageSection>
+    </div>
   </LayoutPageWrapper>
 </template>

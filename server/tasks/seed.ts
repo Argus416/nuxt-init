@@ -4,7 +4,6 @@ export default defineTask({
     description: 'Run database seed task',
   },
   async run() {
-    console.log('Running DB seed task...')
     const users = [
       {
         first_name: 'John',

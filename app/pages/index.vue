@@ -2,9 +2,6 @@
 const { awesome } = useAppConfig()
 definePageMeta({ layout: 'page' })
 useHead({ titleTemplate: '', title: awesome?.name || 'Nuxt blog app' })
-
-const { signIn, getProviders } = useAuth()
-const providers = await getProviders()
 </script>
 
 <template>
