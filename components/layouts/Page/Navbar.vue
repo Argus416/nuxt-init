@@ -10,9 +10,6 @@ const menus = computed(
       []) as AwesomeLayoutPageNavbarMenu[],
 )
 
-const { signIn, getProviders, signOut } = useAuth()
-const providers = await getProviders()
-const { isLoggedIn, userSession } = useUser()
 // drawer
 const showDrawer = ref(false)
 </script>
@@ -48,31 +45,6 @@ const showDrawer = ref(false)
           <template v-for="(item, i) in menus" :key="i">
             <LayoutPageNavbarMenuWrapper :menu="item" />
           </template>
-          <div v-if="!isLoggedIn">
-            <AwesomeButton
-              v-for="provider in providers"
-              :key="provider.id"
-              :text="`Sign in with ${provider.name}`"
-              :to="
-                parseMenuRoute(
-                  awesome?.layout?.welcome?.secondaryActionButton?.to ||
-                    awesome?.project?.links?.github,
-                )
-              "
-              size="sm"
-              type="secondary"
-              @click="signIn(provider.id)"
-            />
-          </div>
-
-          <div v-else>
-            <AwesomeButton
-              :text="`Welcome, ${userSession?.user.fullname}`"
-              size="sm"
-              type="danger"
-              @click="() => signOut()"
-            />
-          </div>
         </div>
         <!-- others -->
         <div class="pl-4 flex space-x-3 text-xl">

@@ -8,6 +8,6 @@ export default defineNuxtConfig({
     autoImport: true,
   },
   runtimeConfig: {
-    POSTGRES_URI: 'postgres://postgres:123321@localhost:5432/nuxt-todo',
+    TMDP_TOKEN: process.env.TMDP_TOKEN,
   },
 })
