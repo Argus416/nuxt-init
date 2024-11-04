@@ -14,9 +14,15 @@ class TMDPServies {
     })
   }
 
-  async getMovies(): Promise<{ results: TMDP_RESPONSE } & TMDP_MOVIE[]> {
+  async getMovies(
+    page = 1,
+  ): Promise<{ results: TMDP_MOVIE[] } & TMDP_RESPONSE> {
     try {
-      const { data } = await this.axiosInstance.get('discover/movie')
+      const { data } = await this.axiosInstance.get('discover/movie', {
+        params: {
+          page,
+        },
+      })
       return data
     } catch (err) {
       if (err instanceof Error) {
@@ -26,7 +32,7 @@ class TMDPServies {
     }
   }
 
-  async getSeries(): Promise<{ results: TMDP_RESPONSE } & TMDP_SERIES[]> {
+  async getSeries(): Promise<{ results: TMDP_SERIES[] } & TMDP_RESPONSE> {
     try {
       const { data } = await this.axiosInstance.get('discover/tv')
       return data
