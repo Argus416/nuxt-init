@@ -96,7 +96,6 @@ export default defineNuxtConfig({
       theme: 'github-dark',
     },
   },
-
   // todo: feat/localization
   // module::i18n
   // i18n: {

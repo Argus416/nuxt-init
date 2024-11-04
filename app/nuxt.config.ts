@@ -8,6 +8,8 @@ export default defineNuxtConfig({
     autoImport: true,
   },
   runtimeConfig: {
-    TMDP_TOKEN: process.env.TMDP_TOKEN,
+    public: {
+      TMDP_TOKEN: process.env.TMDP_TOKEN,
+    },
   },
 })

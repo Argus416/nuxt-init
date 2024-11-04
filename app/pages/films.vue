@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import Card from '../../components/card.vue'
-import TmdbServicesInstance from '../../services/TMDBServices'
 
 definePageMeta({ layout: 'page' })
 useHead({ title: 'Blank Page' })
 
-const films = await TmdbServicesInstance.getMovies()
-const imgUrl = 'https://image.tmdb.org/t/p/w500/'
+const { results: films } = await useTmdb().getMovies()
 </script>
 
 <template>
