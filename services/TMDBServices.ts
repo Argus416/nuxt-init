@@ -1,4 +1,5 @@
 import axios from 'axios'
+import type { TMDP_RESPONSE, TMDP_SERIES, TMDP_MOVIE } from '~/types/tmdp'
 
 class TMDPServies {
   private axiosInstance
@@ -13,23 +14,27 @@ class TMDPServies {
     })
   }
 
-  async getMovies() {
+  async getMovies(): Promise<{ results: TMDP_RESPONSE } & TMDP_MOVIE[]> {
     try {
       const { data } = await this.axiosInstance.get('discover/movie')
       return data
     } catch (err) {
-      console.log({ err, message: err.message })
-      throw new Error(`Error fetching films: ${err.message}`)
+      if (err instanceof Error) {
+        throw new TypeError(`Failed to fetch movies. Reason: ${err.message}`)
+      }
+      throw new Error('An unknown error occurred while fetching movies')
     }
   }
 
-  async getSeries() {
+  async getSeries(): Promise<{ results: TMDP_RESPONSE } & TMDP_SERIES[]> {
     try {
       const { data } = await this.axiosInstance.get('discover/tv')
       return data
-    } catch (err) {
-      console.log({ err, message: err.message })
-      throw new Error(`Error fetching series: ${err.message}`)
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new TypeError(`Failed to fetch series. Reason: ${error.message}`)
+      }
+      throw new Error('An unknown error occurred while fetching series')
     }
   }
 }
