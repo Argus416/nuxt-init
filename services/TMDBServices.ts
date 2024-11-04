@@ -14,33 +14,52 @@ class TMDPServies {
     })
   }
 
-  async getMovies(
-    page = 1,
-  ): Promise<{ results: TMDP_MOVIE[] } & TMDP_RESPONSE> {
+  async getData(params: {
+    page: number
+    type: 'movie' | 'tv'
+    query?: string
+  }): Promise<{ results: TMDP_MOVIE[] } & TMDP_RESPONSE> {
     try {
-      const { data } = await this.axiosInstance.get('discover/movie', {
-        params: {
-          page,
-        },
-      })
-      return data
-    } catch (err) {
-      if (err instanceof Error) {
-        throw new TypeError(`Failed to fetch movies. Reason: ${err.message}`)
+      let data
+      if (params.query || params.query === '') {
+        data = await this.axiosInstance.get(`search/${params.type}`, {
+          params: {
+            query: params.query,
+            page: params.page,
+          },
+        })
+      } else {
+        data = await this.axiosInstance.get(`discover/${params.type}`, {
+          params: {
+            page: params.page,
+          },
+        })
       }
-      throw new Error('An unknown error occurred while fetching movies')
+
+      return data.data
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new TypeError(
+          `Failed to fetch ${params.type}. Reason: ${error.message}`,
+        )
+      }
+      throw new Error(`An unknown error occurred while fetching ${params.type}`)
     }
   }
 
-  async getSeries(): Promise<{ results: TMDP_SERIES[] } & TMDP_RESPONSE> {
+  async searchData(params: {
+    query: string
+    type: 'movie' | 'tv'
+  }): Promise<{ results: TMDP_MOVIE[] } & TMDP_RESPONSE> {
     try {
-      const { data } = await this.axiosInstance.get('discover/tv')
       return data
     } catch (error) {
       if (error instanceof Error) {
-        throw new TypeError(`Failed to fetch series. Reason: ${error.message}`)
+        throw new TypeError(
+          `Failed to fetch ${params.type}. Reason: ${error.message}`,
+        )
       }
-      throw new Error('An unknown error occurred while fetching series')
+      throw new Error(`An unknown error occurred while fetching ${params.type}`)
     }
   }
 }

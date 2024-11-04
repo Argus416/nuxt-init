@@ -1,10 +1,26 @@
 <script lang="ts" setup>
-import Card from '../../components/card.vue'
+import _ from 'lodash'
+import type { TMDP_MOVIE, TMDP_RESPONSE, TMDP_SERIES } from '~/types/tmdp'
+import CardTable from '../../components/cardTable.vue'
 
 definePageMeta({ layout: 'page' })
 useHead({ title: 'Blank Page' })
 
-const { results: series } = await useTmdb().getSeries()
+const page = ref(1)
+const series = ref<{ results: TMDP_SERIES[] } & TMDP_RESPONSE>()
+const search = ref('')
+
+const loadData = async (p: number, search: string) => {
+  series.value = await useTmdb().getData({
+    page: p,
+    type: 'tv',
+    query: search,
+  })
+  const isMorethan500 = series.value!.total_pages > 500
+  series.value.total_pages = isMorethan500 ? 500 : series.value!.total_pages
+}
+
+await loadData(page.value)
 </script>
 
 <template>
@@ -14,15 +30,7 @@ const { results: series } = await useTmdb().getSeries()
     </LayoutPageHeader>
     <LayoutPageSection>
       <LayoutPageSectionTitle text="Section Title" />
-      <section class="grid grid-cols-3 gap-4">
-        <div
-          v-for="serie in series"
-          :key="serie.id"
-          class="border rounded overflow-hidden max-h-[700px]"
-        >
-          <Card :data="serie" />
-        </div>
-      </section>
+      <CardTable :data="series" @loadData="loadData" />
     </LayoutPageSection>
   </LayoutPageWrapper>
 </template>
